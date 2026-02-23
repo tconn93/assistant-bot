@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 from gtts import gTTS
 import pyttsx3
 
-from bot_utilities.ai_utils import generate_response, generate_image_prodia, search, poly_image_gen, generate_grok_response
+from bot_utilities.ai_utils import generate_response, generate_image_prodia, poly_image_gen, generate_grok_response
 from bot_utilities.response_util import split_response 
 from bot_utilities.discord_util import check_token, get_discord_token
 from bot_utilities.config_loader import config, load_current_language, load_instructions
@@ -138,8 +138,7 @@ async def on_message(message):
         )
 
         if internet_access:
-            instructions += f"""\n\nIt's currently {current_time}, You have real-time information and the ability to browse the internet."""
-            await message.add_reaction("🔎")
+            instructions += f"\n\nIt's currently {current_time}. You have a search_web tool available for real-time information."
         channel_id = message.channel.id
         key = f"{message.author.id}-{channel_id}"
 
@@ -148,16 +147,12 @@ async def on_message(message):
 
         message_history[key] = message_history[key][-MAX_HISTORY:]
 
-        # search_results = await search(message.content)
-
         message_history[key].append({"role": "user", "content": message.content})
         history = message_history[key]
 
         async with message.channel.typing():
-            response = await generate_response(instructions=instructions, search=None, history=history)
-            if internet_access:
-                await message.remove_reaction("🔎", bot.user)
-        message_history[key].append({"role": "assistant", "name": personaname, "content": response})
+            response = await generate_response(instructions=instructions, history=history)
+        message_history[key].append({"role": "assistant", "content": response})
 
         # Generate a TTS file
         text_to_speech(response)

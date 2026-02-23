@@ -6,10 +6,10 @@ SMART_MENTION: true # Set to true to enable smart mention feature
 
 GPT_MODEL: grok-4-1-fast-reasoning # Model used for chat completion
 
-MAX_HISTORY: 8 # Set the maximum message history
+MAX_HISTORY: 20 # Set the maximum message history
 
 PRESENCES_CHANGE_DELAY: 8 # Please note that the Presences Change Delay is measured in seconds. It is advisable not to set it too low, as doing so may result in your bot being rate-limited by Discord
-AI_NSFW_CONTENT_FILTER: true # Enable NSFW AI detector to detect NSFW prompt on Imagine Command
+AI_NSFW_CONTENT_FILTER: false # Enable NSFW AI detector to detect NSFW prompt on Imagine Command
 
 LANGUAGE: en # Specify the language code (check 'lang' folder for valid codes)
 
@@ -30,8 +30,8 @@ TRIGGER:
 
 DISABLE_PRESENCE: false 
 PRESENCES:
-  - Working to assist you!
-  - Currently in {guild_count} guilds
+  - Made by Tyler's AI Company
+  - Made by Tyler's AI Company
   - Made by Tyler's AI Company
 # List of different presences to be used
 
