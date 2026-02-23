@@ -23,23 +23,17 @@ openai_client = AsyncOpenAI(
 # Tool definitions for the Responses API
 XAI_TOOLS = [
     {
-        "type": "function",
-        "name": "search_web",
-        "description": (
-            "Search the web for real-time information. Use this when the user asks about "
-            "current events, recent news, live data, or anything requiring up-to-date information."
-        ),
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "query": {
-                    "type": "string",
-                    "description": "The search query to look up",
-                }
-            },
-            "required": ["query"],
-            "additionalProperties": False,
-        },
+        "type": "web_search",
+    },
+    {
+        "type":"file_search",
+        "vector_store_ids": ["collection_354bc49e-8970-4876-bd97-47a4c1683933","collection_3c22fb13-1340-40a9-8b47-4f6a0bb92c0e"],
+        "max_num_results":20
+    },
+    {
+        "type":"mcp",
+        "server_url":"https://rhen.tyler.ad/mcp",
+        "server_label":"google-workspace"
     }
 ]
 
